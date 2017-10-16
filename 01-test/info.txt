@@ -1,0 +1,5 @@
+Tested changes to alloyCompute function that made it compatible with MPI multiprocessing.
+
+Old version was 1267.
+
+New version was 1327.

@@ -57,7 +57,7 @@ class clusterData():
         return
 
     def getRadius(self,size):
-        if self.typeName == "vType" or self.typeName == "voidType" or self.typeName == "iType":
+        if self.typeName == "vType" or self.typeName == "voidType":
             return (LATTICE_CONSTANT * (float(size)*3.0/(16.0*PI))**(1.0/3.0))
         elif self.typeName == "perfectType":
             return (LATTICE_CONSTANT * (float(size)*2.0**0.5/(4.0*PI))**0.5)
@@ -76,13 +76,13 @@ class clusterData():
             size = self.firstSize
             for value in line:
                 temp_density = temp_density + value
-                temp_average_size = temp_average_size + value * self.getDiameter(size)
+                temp_average_size = temp_average_size + value * size
                 size = size + 1
             density.append(temp_density)
             if temp_density == 0.0:
                 average_size.append(0.0)
             else:
-                average_size.append((temp_average_size/temp_density))
+                average_size.append(self.getDiameter(temp_average_size/temp_density))
         self.averageDensity=density
         self.averageDiameter=average_size
         return
@@ -98,13 +98,13 @@ class clusterData():
                 diam = self.getDiameter(size)
                 if diam > VISIBILITY:
                     temp_density = temp_density + value
-                    temp_average_size = temp_average_size + value * diam
+                    temp_average_size = temp_average_size + value * size
                 size = size + 1
             density.append(temp_density)
             if temp_density == 0.0:
                 average_size.append(0.0)
             else:
-                average_size.append((temp_average_size/temp_density))
+                average_size.append(self.getDiameter(temp_average_size/temp_density))
         self.visibleDensity = density
         self.visibleDiameter = average_size
         return (density,average_size)
@@ -206,7 +206,7 @@ def main():
     #plt.xlim(0.0,9.0)
 
     plt.tight_layout()
-    plt.savefig("visualization.png", format='png', bbox_extra_artists=(lgd,), bbox_inches='tight')
+    plt.savefig("visualizationAlt.png", format='png', bbox_extra_artists=(lgd,), bbox_inches='tight')
     plt.show()
     return
 

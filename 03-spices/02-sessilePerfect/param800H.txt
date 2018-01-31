@@ -1,0 +1,12 @@
+dimensions=1
+regularGrid=cheby
+process=reaction diff
+netParam=1000 5 4
+grid=11 100
+grouping=1001 1
+vizHandler=dummy
+perfHandler=dummy
+material=800H
+startTemp=713
+flux=2.884e-3
+petscArgs=-fieldsplit_0_pc_type sor -ts_max_snes_failures 500 -pc_fieldsplit_detect_coupling -ts_dt 1.0e-12 -ts_adapt_dt_max 200 -ts_exact_final_time matchstep -ts_monitor -pc_type fieldsplit -fieldsplit_0_pc_type sor -fieldsplit_1_pc_type redundant -ts_final_time 20000.0 -ts_max_steps 2000 -alloy -ts_rtol 1.0e-3
